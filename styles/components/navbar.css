@@ -1,0 +1,25 @@
+/* TEMP COLOR */
+.navbar {
+    width: 100%;
+    display: flex;
+    background: orange;
+    height: 50px;
+    display: relative;
+}
+
+.navlink {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    margin-left: 20px;
+    width: 200px;
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+.navlink:hover {
+    transition: 0.6s all ease;
+    background: #aaa;
+}
