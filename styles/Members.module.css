@@ -1,0 +1,8 @@
+.memberTitle {
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 100px;
+  height: auto;
+}

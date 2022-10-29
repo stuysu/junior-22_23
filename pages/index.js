@@ -1,5 +1,6 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+
+import styles from "../styles/Home.module.css";
 
 import NavBar from "../components/common/NavBar";
 
@@ -10,9 +11,12 @@ export default function Home() {
       <Head>
         <title>Home | Junior Caucus</title>
       </Head>
-      <NavBar /> 
-      Temp Home
-      
+
+      <NavBar />
+
+      <div className={styles.titleContainer}>
+        <p className={styles.title}>Stuyvesant Junior Caucus</p>
+      </div>
     </div>
   )
 }

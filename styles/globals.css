@@ -24,3 +24,8 @@ a {
     background: white;
   }
 }
+
+@font-face {
+  font-family: "Prompt";
+  src: url("/fonts/Prompt/Prompt-Regular.ttf");
+}
