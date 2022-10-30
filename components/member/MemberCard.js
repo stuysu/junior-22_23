@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "../../styles/components/MemberCard.module.css";
 
 // imgurl -> their thumbnail img
 // name -> their name
@@ -10,12 +11,12 @@ import Image from "next/image";
 
 export default function MemberCard ({src, name, children}) {
     return (
-        <div className="member-card">
-            <div className="member-front">
-                <div className="member-name">{name}</div>
-                <Image src={src} width={500} height={500} />
+        <div className={styles.memberCard}>
+            <div className={styles.memberFront}>
+                <div className={styles.memberName}>{name}</div>
+                <Image src={src ? src : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} width={250} height={230} />
             </div>
-            <div className="member-desc">
+            <div className={styles.memberDesc}>
                 {children}
             </div>
         </div>

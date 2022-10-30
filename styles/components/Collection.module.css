@@ -5,12 +5,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 .gridContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     grid-gap: 10px;
-    background-color: #2196F3;
     padding: 10px;
+    justify-items: center;
 }

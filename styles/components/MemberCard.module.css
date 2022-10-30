@@ -1,12 +1,15 @@
-.member-card {
+.memberCard {
   width: 250px;
-  height: 250px;
+  height: 280px;
   background: white;
   cursor: pointer;
   position: relative;
+  border-radius: 10px;
+  border: 2px solid gray;
+  overflow: hidden;
 }
 
-.member-name {
+.memberName {
   width: 100%;
   height: 50px;
   font-size: 30px;
@@ -15,18 +18,18 @@
   align-items: center;
 }
 
-.member-desc {
+.memberDesc {
   visibility: hidden;
   position: absolute;
   top: 0;
 }
 
-.member-card:hover {
+.memberCard:hover {
   padding: 10px;
 }
-.member-card:hover .member-desc {
+.memberCard:hover .memberDesc {
   visibility: visible;
 }
-.member-card:hover .member-front {
+.memberCard:hover .memberFront {
   visibility: hidden;
 }
