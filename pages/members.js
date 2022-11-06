@@ -5,6 +5,15 @@ import Collection from "../components/layouts/Collection";
 
 import styles from "../styles/Members.module.css";
 
+export async function getStaticProps() {
+  return {
+    props: {
+      title: 'Members | Junior Caucus',
+      currentPage: 'Members'
+    }
+  };
+}
+
 // Temp Navbar. Render once
 // store members somewhere else for quick editing
 export default function Members() {
@@ -14,12 +23,10 @@ export default function Members() {
                 <title>Members | Junior Caucus</title>
             </Head>
 
-            <NavBar />
-
             <div className={styles.memberTitle}>
                 Members
             </div>
-            
+
             <Collection title="IT">
                 <MemberCard name="Randy Sim" src="">
                     This is a test description. I have no personality nor interests.

@@ -1,6 +1,5 @@
 .navbarCaucusLogo {
   position: absolute;
-  height: 70px;
   left: 10px;
   top: 10px;
 }
@@ -11,13 +10,7 @@
   position: absolute;
   left: 50%;
   top: 10px;
-  display: flex;
   transform: translateX(-50%);
-}
-
-.navbarSocials>* {
-  margin: 0px 5px;
-  height: 70px;
 }
 
 /*Navbar links*/
@@ -29,22 +22,27 @@
   top: 20px;
 }
 
-.navbarLinks>* {
+.navbarLinkClickable {
   margin: 0px 10px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
 
   font-family: 'Prompt';
   font-size: 25px;
   color: #949494;
   text-decoration: underline;
+
+  cursor: pointer;
 }
 
-.navbarLinks>*:hover {
+.navbarLinkClickable:hover {
   transition: 0.3s all ease;
   color: #555555;
+}
+
+.navbarLinkUnclickable {
+  margin: 0px 10px;
+
+  font-family: 'Prompt';
+  font-size: 25px;
+  color: #cccccc;
+  text-decoration: underline;
 }
