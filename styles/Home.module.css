@@ -1,14 +1,7 @@
 .titleContainer {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.title {
-  font-family: 'Prompt';
-  font-size: 100px;
-
-  width: 1228px;
-  height: 151px;
+  height: 100vh;
 }

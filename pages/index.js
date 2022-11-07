@@ -1,3 +1,4 @@
+import Container from '../components/layouts/Container';
 import styles from '../styles/Home.module.css';
 
 export async function getStaticProps() {
@@ -13,8 +14,13 @@ export default function Home() {
   return (
     <>
       <div className={styles.titleContainer}>
-        <p className={styles.title}>Stuyvesant Junior Caucus</p>
+        <h1 className="title">Stuyvesant Junior Caucus</h1>
       </div>
+
+      <Container title="Who Are We?">
+        {/* TODO: Put actual information here */}
+        <p>What a great question, random visitor!</p>
+      </Container>
     </>
   );
 }
