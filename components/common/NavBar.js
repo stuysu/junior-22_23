@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import ImageLink from './ImageLink';
 import Link from 'next/link';
 import styles from '../../styles/components/NavBar.module.css';
 
@@ -11,18 +11,33 @@ export default function NavBar({ currentPage }) {
   return (
     <div className={styles.navbar}>
       <div className={styles.navbarCaucusLogo}>
-        <Link href="/">
-          <Image src="/logos/juniorcaucus.svg" width={64} height={64} alt="" />
-        </Link>
+        <ImageLink
+          href="/"
+          src="/logos/juniorcaucus.svg"
+          width={64}
+          height={64}
+          alt="Caucus Logo"
+          external={false}
+        />
       </div>
 
       <div className={styles.navbarSocials}>
-        <Link href="https://www.facebook.com/StuyJuniorCaucus/">
-          <Image src="/logos/facebook.svg" width={80} height={64} alt="" />
-        </Link>
-        <Link href="https://www.instagram.com/stuyjuniorcaucus/">
-          <Image src="/logos/instagram.svg" width={80} height={64} alt="" />
-        </Link>
+        <ImageLink
+          href="https://www.facebook.com/StuyJuniorCaucus/"
+          src="/logos/facebook.svg"
+          width={80}
+          height={64}
+          alt="Facebook Logo"
+          external={true}
+        />
+        <ImageLink
+          href="https://www.instagram.com/stuyjuniorcaucus/"
+          src="/logos/instagram.svg"
+          width={80}
+          height={64}
+          alt="Instagram Logo"
+          external={true}
+        />
       </div>
 
       <div className={styles.navbarLinks}>
