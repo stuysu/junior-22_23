@@ -1,9 +1,16 @@
-import Head from "next/head";
-import NavBar from "../components/common/NavBar";
-import MemberCard from "../components/member/MemberCard.js";
-import Collection from "../components/layouts/Collection";
+import Collection from '../components/layouts/Collection';
+import MemberCard from '../components/member/MemberCard.js';
 
-import styles from "../styles/Members.module.css";
+// import styles from '../styles/Members.module.css';
+
+export async function getStaticProps() {
+  return {
+    props: {
+      title: 'Members | Junior Caucus',
+      currentPage: 'Members'
+    }
+  };
+}
 
 /* 
 MEMBER IN FORMAT
@@ -20,13 +27,16 @@ const renderMembers = members => {
 
     let collections = [];
 
+    // added key just to make react happy :D
+    let k = 0;
     for (let [key, value] of Object.entries(deps)) {
-        let cards = value.map(m => <MemberCard name={m[1]} src={m[5]} role={m[2]}>{m[4]}</MemberCard>)
+        let cards = value.map((m, i) => <MemberCard key={i} name={m[1]} src={m[5]} role={m[2]}>{m[4]}</MemberCard>)
         collections.push(
-            <Collection title={key.toUpperCase()}>
+            <Collection title={key.toUpperCase()} key={k}>
                 {cards}
             </Collection>
         )
+        k++;
     }
 
     return collections;
@@ -47,18 +57,9 @@ const members = [
 // store members somewhere else for quick editing
 export default function Members() {
     return (
-        <div>
-            <Head>
-                <title>Members | Junior Caucus</title>
-            </Head>
-
-            <NavBar />
-
-            <div className={styles.memberTitle}>
-                Members
-            </div>
-            
+        <>
+            <h1 className="title">Our Team</h1>
             {renderMembers(members)}
-        </div>
+        </>
     )
 }

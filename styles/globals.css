@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Prompt', sans-serif;
 }
 
 a {
@@ -26,6 +25,18 @@ a {
 }
 
 @font-face {
-  font-family: "Prompt";
-  src: url("/fonts/Prompt/Prompt-Regular.ttf");
+  font-family: 'Prompt';
+  src: url('/fonts/Prompt/Prompt-Regular.ttf');
+}
+
+.title {
+  font-size: calc(3rem + 5vw);
+  font-weight: normal;
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 6rem;
+  }
 }

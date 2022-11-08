@@ -1,50 +1,61 @@
-import Image from 'next/image';
+import ImageLink from './ImageLink';
 import Link from 'next/link';
 import styles from '../../styles/components/NavBar.module.css';
 
-const pages = {
-  Home: '/',
-  Members: '/about'
-};
+const pages = [
+  ['Home', '/'],
+  ['Members', '/members']
+];
 
 export default function NavBar({ currentPage }) {
   return (
     <div className={styles.navbar}>
-      <Link href="/">
-        <Image
+      <div className={styles.navbarCaucusLogo}>
+        <ImageLink
+          href="/"
           src="/logos/juniorcaucus.svg"
-          className={styles.navbarCaucusLogo}
           width={64}
           height={64}
-          alt=""
+          alt="Caucus Logo"
+          external={false}
         />
-      </Link>
-
-      <div className={styles.navbarSocials}>
-        <Link href="https://www.facebook.com/StuyJuniorCaucus/">
-          <Image
-            src="/logos/facebook.svg"
-            className={styles.navbarSocialsLogo}
-            width={64}
-            height={64}
-            alt=""
-          />
-        </Link>
-        <Link href="https://www.instagram.com/stuyjuniorcaucus/">
-          <Image
-            src="/logos/instagram.svg"
-            className={styles.navbarSocialsLogo}
-            width={64}
-            height={64}
-            alt=""
-          />
-        </Link>
       </div>
 
-      {/* TODO: Indicate current page */}
+      <div className={styles.navbarSocials}>
+        <ImageLink
+          href="https://www.facebook.com/StuyJuniorCaucus/"
+          src="/logos/facebook.svg"
+          width={80}
+          height={64}
+          alt="Facebook Logo"
+          external={true}
+        />
+        <ImageLink
+          href="https://www.instagram.com/stuyjuniorcaucus/"
+          src="/logos/instagram.svg"
+          width={80}
+          height={64}
+          alt="Instagram Logo"
+          external={true}
+        />
+      </div>
+
       <div className={styles.navbarLinks}>
-        <Link href="/">Home</Link>
-        <Link href="/members">Members</Link>
+        {pages.map(([page, link], index) => {
+          if (page != currentPage) {
+            return (
+              <Link href={link} key={index}>
+                <p className={styles.navbarLinkClickable}>{page}</p>
+              </Link>
+            );
+          } else {
+            return (
+              <p key={index} className={styles.navbarLinkUnclickable}>
+                {page}
+              </p>
+            );
+          }
+        })}
       </div>
     </div>
   );
