@@ -1,5 +1,8 @@
 import ImageLink from './ImageLink';
+import Image from 'next/image';
 import Link from 'next/link';
+import {useState} from 'react';
+
 import styles from '../../styles/components/NavBar.module.css';
 
 const pages = [
@@ -8,6 +11,12 @@ const pages = [
 ];
 
 export default function NavBar({ currentPage }) {
+  const [isHamburgerActive, setIsHamburgerActive] = useState(false);
+
+  const toggleHamburger = event => {
+    setIsHamburgerActive(current => !current);
+  };
+
   return (
     <div className={styles.navbar}>
       <div className={styles.navbarCaucusLogo}>
@@ -40,12 +49,20 @@ export default function NavBar({ currentPage }) {
         />
       </div>
 
-      <div className={styles.navbarLinks}>
+      <div className={`${styles.hamburger} ${isHamburgerActive ? styles.openedHamburger : ""}`} onClick={toggleHamburger}>
+        <Image
+          src="/logos/hamburger.svg"
+          width={64}
+          height={64}
+        />
+      </div>
+
+      <div className={`${styles.navbarLinks} ${isHamburgerActive ? styles.openedHamburger : ""}`}>
         {pages.map(([page, link], index) => {
           if (page != currentPage) {
             return (
               <Link href={link} key={index}>
-                <p className={styles.navbarLinkClickable}>{page}</p>
+                <p className={styles.navbarLinkClickable} onClick={toggleHamburger}>{page}</p>
               </Link>
             );
           } else {
