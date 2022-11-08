@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+}
+
+.containerTitle {
+  font-size: 3rem;
+  font-weight: normal;
+}
