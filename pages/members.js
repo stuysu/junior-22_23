@@ -3,59 +3,71 @@ import MemberCard from '../components/member/MemberCard.js';
 
 // import styles from '../styles/Members.module.css';
 
-export async function getStaticProps() {
+/*
+MEMBER IN FORMAT
+[
+    [name, position, img_src, desc]
+]
+*/
+function renderMembers(members) {
+  let deps = {};
+  members.forEach((member, i) => {
+    let [name, position, img_src, desc] = member;
+
+    let memberCard = (
+      <MemberCard name={name} src={img_src} role={position} key={i}>
+        {desc}
+      </MemberCard>
+    );
+
+    if (!deps[position]) deps[position] = [];
+    deps[position].push(memberCard);
+  });
+
+  let collections = Object.entries(deps).map(([department, memberCards], k) => {
+    return (
+      <Collection title={department.toUpperCase()} key={k}>
+        {memberCards}
+      </Collection>
+    );
+  });
+
+  return collections;
+}
+
+export async function getServerSideProps() {
+  const { google } = require("googleapis");
+
+  const sheets = google.sheets({
+    version: "v4",
+    auth: process.env.SHEETS_API_KEY,
+  });
+
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.MEMBERS_SPREADSHEET_ID,
+    range: "Form Responses 1!B1:G",
+  });
+
+  let data = response.data.values;
+  let members = [];
+
+  for (let b = 1; b < data.length; b++) {
+    let [name, position, img_src, , desc] = data[b]; //Desc should actually be one before since rn it points to the "hello 😊" column
+
+    members.push([name, position, img_src, desc]);
+  }
+
+  //Had to move the title and currentPage stuff because getServerSideProps and getStaticProps can't coexist
   return {
     props: {
+      members: members,
       title: 'Members | Junior Caucus',
       currentPage: 'Members'
     }
   };
 }
 
-/* 
-MEMBER IN FORMAT
-[
-    [email, name, position, department, desc, img_src]
-]
-*/
-const renderMembers = members => {
-    let deps = {}
-    members.forEach(member => {
-        if (!deps[member[3]]) deps[member[3]] = [];
-        deps[member[3]].push(member);
-    });
-
-    let collections = [];
-
-    // added key just to make react happy :D
-    let k = 0;
-    for (let [key, value] of Object.entries(deps)) {
-        let cards = value.map((m, i) => <MemberCard key={i} name={m[1]} src={m[5]} role={m[2]}>{m[4]}</MemberCard>)
-        collections.push(
-            <Collection title={key.toUpperCase()} key={k}>
-                {cards}
-            </Collection>
-        )
-        k++;
-    }
-
-    return collections;
-}
-
-/* TEMP MEMBERS, create CSV parse function once we get CSV */
-const members = [
-    ["rsim40@stuy.edu", "Randy Sim", "JC President", "IT", "I have no personality nor interests.", ""],
-    ["rsim40@stuy.edu", "Randy Sim", "JC President", "MEDIA", "I have no personality nor interests.", ""],
-    ["rsim40@stuy.edu", "Randy Sim", "JC President", "EVENTS", "I have no personality nor interests.", ""],
-    ["rsim40@stuy.edu", "Randy Sim", "JC President", "FINANCE", "I have no personality nor interests.", ""],
-    ["rsim40@stuy.edu", "Randy Sim", "JC President", "IT", "I have no personality nor interests.", ""],
-    ["rsim40@stuy.edu", "Randy Sim", "JC President", "IT", "I have no personality nor interests.", ""],
-    ["rsim40@stuy.edu", "Randy Sim", "JC President", "IT", "I have no personality nor interests.", ""],
-]
-
-// Temp Navbar. Render once
-// store members somewhere else for quick editing
-export default function Members() {
+export default function Members({ members }) {
     return (
         <>
             <h1 className="title">Our Team</h1>
