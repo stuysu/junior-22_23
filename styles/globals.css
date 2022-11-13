@@ -40,3 +40,67 @@ a {
     font-size: 6rem;
   }
 }
+
+/* ---------- CalendarWidget ---------- */
+.react-calendar {
+  margin-bottom: 0.5rem;
+  width: calc(20rem + 10vw);
+}
+
+.react-calendar__navigation {
+  display: flex;
+
+  margin: 1rem;
+}
+
+.react-calendar__navigation__label {
+  margin: auto;
+
+  background: none;
+
+  pointer-events: none;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f54242;
+}
+
+.react-calendar__navigation__arrow {
+  margin: auto;
+
+  background: none;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f54242;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+}
+
+.react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
+}
+
+.react-calendar button {
+  border: 0;
+}
+
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+
+.react-calendar__tile {
+  height: 2rem;
+
+  background: none;
+
+  color: black;
+}
+
+.react-calendar__tile--active {
+  background: #006edc;
+
+  color: white;
+}
