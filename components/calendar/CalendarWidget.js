@@ -4,11 +4,49 @@ import EventItem from './EventItem';
 import styles from '../../styles/components/CalendarWidget.module.css';
 import { useState } from 'react';
 
-export default function CompactCalendar() {
+export default function CalendarWidget({ events }) {
   const [activeDate, setActiveDate] = useState(new Date());
+
+  const renderedEvents = events.map((event) => {
+    const { id, summary, description, start, end } = event;
+
+    let startDate;
+    let endDate;
+
+    if (start.date && end.date) {
+      // All-day event
+
+      startDate = new Date(start.date);
+      endDate = new Date(end.date);
+    } else {
+      // Time-based event
+
+      // Create a date object from the event's start date (12:00 AM)
+      startDate = new Date(event.start.dateTime);
+      startDate.setHours(0, 0, 0, 0);
+
+      // Create a date object from the event's end date (11:59 PM)
+      endDate = new Date(event.end.dateTime);
+      endDate.setHours(23, 59, 59, 999);
+    }
+
+    // If the event is on the active date, render it
+    if (startDate <= activeDate && activeDate < endDate) {
+      return (
+        <EventItem
+          key={id}
+          name={summary}
+          description={description}
+          startTime={start.dateTime}
+          endTime={end.dateTime}
+        />
+      );
+    }
+  });
 
   return (
     <div className={styles.calendarContainer}>
+      {/* Day overview with Stuy info */}
       <DayOverview
         className={styles.dayOverview}
         date={activeDate}
@@ -16,6 +54,7 @@ export default function CompactCalendar() {
         scheduleDay={'Conference Day'}
       />
 
+      {/* Month-view calendar */}
       <Calendar
         className={styles.calendar}
         // Create a US month-view calendar
@@ -41,26 +80,10 @@ export default function CompactCalendar() {
         value={activeDate}
       />
 
-      <div className={styles.eventsList}>
-        <EventItem
-          name="Event 1"
-          description="Description 1"
-          startTime="9:00 AM"
-          endTime="10:00 AM"
-        />
-        <EventItem
-          name="Event 2"
-          description="Description 2"
-          startTime="10:00 AM"
-          endTime="11:00 AM"
-        />
-        <EventItem
-          name="Event 3"
-          description="Description 3"
-          startTime="11:00 AM"
-          endTime="12:00 PM"
-        />
-      </div>
+      {/* Events list (render only if there are events on the active day) */}
+      {renderedEvents.find((event) => event !== undefined) && (
+        <div className={styles.eventsList}>{renderedEvents}</div>
+      )}
     </div>
   );
 }
