@@ -1,34 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# junior.stuysu.org
 
-## Getting Started
+The Stuyvesant Junior Caucus (2022-2023) website, developed with Next.js!
 
-First, run the development server:
+## Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+0. Clone the repository (`git clone https://github.com/achen318/junior.stuysu.org.git`).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Change directory to the repository (`cd junior.stuysu.org`).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+2. Install dependencies (`npm install`).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+3. Create an `.env.local` file with the following environment variables, providing your own values:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+| Variable                 | Description                                                                                              |
+| ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `SHEETS_API_KEY`         | The API key for the [Google Sheets API](https://developers.google.com/sheets/api/quickstart/nodejs).     |
+| `MEMBERS_SPREADSHEET_ID` | The ID of the Google Sheets containing the members data.                                                 |
+| `CALENDAR_API_KEY`       | The API key for the [Google Calendar API](https://developers.google.com/calendar/api/quickstart/nodejs). |
+| `CALENDAR_ID`            | The ID of the Google Calendar containing the events.                                                     |
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. Run the development server (`npm run dev`).

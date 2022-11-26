@@ -40,3 +40,91 @@ a {
     font-size: 6rem;
   }
 }
+
+/* ---------- CalendarWidget ---------- */
+
+/* Responsive calendar */
+.react-calendar {
+  margin-bottom: 0.5rem;
+}
+
+/* Style top navigation element */
+.react-calendar__navigation {
+  display: flex;
+
+  margin: 1rem;
+}
+
+/* Style "Month Year" navigation label, make it not clickable */
+.react-calendar__navigation__label {
+  margin: auto;
+
+  background: none;
+
+  pointer-events: none;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f54242;
+}
+
+/* Style navigation < and > buttons */
+.react-calendar__navigation__arrow {
+  margin: auto;
+
+  background: none;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f54242;
+}
+
+/* Center days of the week */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+}
+
+/* Remove underline from days of the week */
+.react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
+}
+
+/* Remove border from each button */
+.react-calendar button {
+  border: 0;
+}
+
+/* Show pointer when hovering over a button */
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+
+/* Style each day tile */
+.react-calendar__tile {
+  height: 2rem;
+
+  background: none;
+
+  color: black;
+}
+
+/* Add a red circle to today's date */
+.react-calendar__tile--now abbr {
+  background: #f54242;
+  border-radius: 100%;
+  padding: 5px;
+  color: white;
+}
+
+/* Make selected tile blue */
+.react-calendar__tile--active {
+  background: #006edc;
+  border-radius: 5px;
+
+  color: white;
+}
+
+/* Hide red circle if selecting today */
+.react-calendar__tile--active abbr {
+  background: none;
+}
