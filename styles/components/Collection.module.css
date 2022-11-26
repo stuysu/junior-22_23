@@ -20,11 +20,19 @@
 	margin-bottom: 50px;
 }
 
+.gridContainerContainer {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80%;
+}
+
 .gridContainer {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+
 	grid-gap: 25px;
-	padding: 10px;
-	justify-items: center;
-	
 }

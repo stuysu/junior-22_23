@@ -1,6 +1,7 @@
 .memberCardCont {
 	width: 300px;
 	height: 330px;
+	margin-bottom: 50px;
 }
 
 .memberCard {
@@ -54,12 +55,12 @@
 }
 
 .memberSocials {
-	width: 150px;
-	display: inline-grid;
-	justify-content: right;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+
 	grid-template-columns: repeat(2, 30px);
-	gap: 2.5px;
-	margin-right: 2.5px;
+	margin-top: 5px;
 }
 
 .memberCard:hover {

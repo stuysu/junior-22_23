@@ -9,8 +9,10 @@ export default function Collection({ title, children }) {
 			{
 				styles.collectionTitle ? <div className={styles.titleUnderline} /> : ""
 			}
-			<div className={styles.gridContainer}>
-				{children}
+			<div className={styles.gridContainerContainer}>
+				<div className={styles.gridContainer}>
+					{children}
+				</div>
 			</div>
 		</div>
 	)
