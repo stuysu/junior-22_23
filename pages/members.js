@@ -12,16 +12,20 @@ MEMBER IN FORMAT
 function renderMembers(members) {
   let deps = {};
   members.forEach((member, i) => {
-    let [name, position, img_src, desc] = member;
-
     let memberCard = (
-      <MemberCard name={name} src={img_src} role={position} key={i}>
-        {desc}
-      </MemberCard>
+      <MemberCard
+        name={member["Name"]}
+        image_src={member["Photo"]}
+        role={member["Position"]}
+        bio={member["Bio"]}
+        email={member["Email"]}
+        socials={[member["Socials 1"], member["Socials 2"], member["Socials 3"]]}
+        key={i}
+      />
     );
 
-    if (!deps[position]) deps[position] = [];
-    deps[position].push(memberCard);
+    if (!deps[member["Department"]]) deps[member["Department"]] = [];
+    deps[member["Department"]].push(memberCard);
   });
 
   let collections = Object.entries(deps).map(([department, memberCards], k) => {
@@ -35,7 +39,13 @@ function renderMembers(members) {
   return collections;
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, res }) {
+  //Cache
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=120, stale-while-revalidate=600'
+  )
+  
   const { google } = require("googleapis");
 
   const sheets = google.sheets({
@@ -45,22 +55,26 @@ export async function getServerSideProps() {
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.MEMBERS_SPREADSHEET_ID,
-    range: "Form Responses 1!B1:G",
+    range: "Form Responses 1!A1:Z",
   });
 
-  let data = response.data.values;
-  let members = [];
+  //Convert spreadsheet data into array of dicts
+  let [columns, ...rows] = response.data.values;
 
-  for (let b = 1; b < data.length; b++) {
-    let [name, position, img_src, , desc] = data[b]; //Desc should actually be one before since rn it points to the "hello 😊" column
+  let parsed_csv = rows.map((row) => {
+    let dict = {};
 
-    members.push([name, position, img_src, desc]);
-  }
+    row.forEach((v, i) => {
+      dict[columns[i]] = v;
+    });
+
+    return dict;
+  });
 
   //Had to move the title and currentPage stuff because getServerSideProps and getStaticProps can't coexist
   return {
     props: {
-      members: members,
+      members: parsed_csv,
       title: 'Members | Junior Caucus',
       currentPage: 'Members'
     }

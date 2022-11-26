@@ -1,5 +1,7 @@
 import Image from "next/image";
+import ImageLink from "../common/ImageLink.js";
 import styles from "../../styles/components/MemberCard.module.css";
+import url from 'url';
 
 // imgurl -> their thumbnail img
 // name -> their name
@@ -9,15 +11,53 @@ import styles from "../../styles/components/MemberCard.module.css";
 </MemberCard>
 */
 
-export default function MemberCard({ src, name, role, children }) {
+function createSocialIcon(social, email=false) {
+	const logoForSocial = {
+		"www.facebook.com": "/logos/facebook.svg",
+		"github.com": "/logos/github.svg",
+		"www.instagram.com": "/logos/instagram.svg",
+		"www.linkedin.com": "/logos/linkedin.svg",
+		"www.tiktok.com": "/logos/tiktok.svg",
+		"www.youtube.com": "/logos/youtube.svg"
+	}
+
+	if (email) {
+		return (
+			<ImageLink
+				width={30}
+				height={30}
+				href={"mailto:" + social}
+				src="/logos/gmail.svg"
+			/>
+		);
+	}
+
+	let parsed_url = url.parse(social);
+
+	if (parsed_url.host == null) {
+		return;
+	}
+
+	return (
+		<ImageLink
+			width={30}
+			height={30}
+			href={social}
+			src={logoForSocial[parsed_url.host]}
+		/>
+	);
+}
+
+export default function MemberCard({ name, image_src, role, bio, email, socials }) {
 	return (
 		<div className={styles.memberCardCont}>
 			<div className={styles.memberCard}>
 				<div className={styles.memberFront}>
-					<Image src={src || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} width={250} height={250} />
+					{/*Temp, changed to img tag so any domain can be used*/}
+					<img src={image_src || "/images/Portrait_Placeholder.jpg"} width={300} height={300} />
 				</div>
 				<div className={styles.memberDesc}>
-					{children}
+					{bio}
 				</div>
 			</div>
 			<div className={styles.memberInfo}>
@@ -30,18 +70,10 @@ export default function MemberCard({ src, name, role, children }) {
 					</div>
 				</div>
 				<div className={styles.memberSocials}>
-					<div className={styles.iconCont}>
-						<div className={styles.tempIcon} />
-					</div>
-					<div className={styles.iconCont}>
-						<div className={styles.tempIcon} />
-					</div>
-					<div className={styles.iconCont}>
-						<div className={styles.tempIcon} />
-					</div>
-					<div className={styles.iconCont}>
-						<div className={styles.tempIcon} />
-					</div>
+					{createSocialIcon(email, true)}
+					{createSocialIcon(socials[0])}
+					{createSocialIcon(socials[1])}
+					{createSocialIcon(socials[2])}
 				</div>
 			</div>
 		</div>
