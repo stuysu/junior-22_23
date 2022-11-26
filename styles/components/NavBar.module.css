@@ -4,6 +4,18 @@
   top: 10px;
 }
 
+@media only screen and (min-width: 768px) {
+  .navbar {
+    margin-bottom: -55px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    margin-bottom: 65px;
+  }
+}
+
 /*Navbar socials*/
 
 .navbarSocials {
@@ -15,11 +27,51 @@
 
 /*Navbar links*/
 
-.navbarLinks {
-  position: absolute;
-  display: flex;
-  right: 10px;
-  top: 20px;
+@media only screen and (max-width: 768px) {
+  .hamburger {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    transition-duration: 0.3s;
+    transition-property: transform;
+  }
+
+  .hamburger.openedHamburger {
+    transform: rotate(90deg);
+  }
+
+  .navbarLinks {
+    position: absolute;
+    text-align: right;
+    right: 4px;
+    top: 75px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition-duration: 0.3s;
+    transition-property: opacity;
+  }
+
+  .navbarLinks.openedHamburger {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .hamburger {
+    visibility: hidden;
+  }
+
+  .navbarLinks {
+    position: absolute;
+    display: flex;
+    right: 10px;
+    top: 42px;
+    transform: translateY(-50%);
+  }
 }
 
 .navbarLinkClickable {
