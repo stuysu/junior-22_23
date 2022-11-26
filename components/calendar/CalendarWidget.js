@@ -47,12 +47,7 @@ export default function CalendarWidget({ events }) {
   return (
     <div className={styles.calendarContainer}>
       {/* Day overview with Stuy info */}
-      <DayOverview
-        className={styles.dayOverview}
-        date={activeDate}
-        abDay="A1"
-        scheduleDay={'Conference Day'}
-      />
+      <DayOverview className={styles.dayOverview} date={activeDate} />
 
       {/* Month-view calendar */}
       <Calendar
