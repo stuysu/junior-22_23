@@ -45,7 +45,7 @@ export async function getServerSideProps({ req, res }) {
     'Cache-Control',
     'public, s-maxage=120, stale-while-revalidate=600'
   )
-  
+
   const { google } = require("googleapis");
 
   const sheets = google.sheets({
@@ -82,10 +82,10 @@ export async function getServerSideProps({ req, res }) {
 }
 
 export default function Members({ members }) {
-    return (
-        <>
-            <h1 className="title">Our Team</h1>
-            {renderMembers(members)}
-        </>
-    )
+  return (
+    <>
+      <h1 className="title">Our Team</h1>
+      {renderMembers(members)}
+    </>
+  )
 }

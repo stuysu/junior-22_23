@@ -24,8 +24,8 @@ function createSocialIcon(social, email=false) {
 	if (email) {
 		return (
 			<ImageLink
-				width={30}
-				height={30}
+				width={25}
+				height={25}
 				href={"mailto:" + social}
 				src="/logos/mail-outline.svg"
 			/>
@@ -40,10 +40,11 @@ function createSocialIcon(social, email=false) {
 
 	return (
 		<ImageLink
-			width={30}
-			height={30}
+			width={25}
+			height={25}
 			href={social}
 			src={logoForSocial[parsed_url.host]}
+			external={true}
 		/>
 	);
 }
