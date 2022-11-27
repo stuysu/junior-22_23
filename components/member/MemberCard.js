@@ -13,12 +13,12 @@ import url from 'url';
 
 function createSocialIcon(social, email=false) {
 	const logoForSocial = {
-		"www.facebook.com": "/logos/facebook.svg",
-		"github.com": "/logos/github.svg",
-		"www.instagram.com": "/logos/instagram.svg",
-		"www.linkedin.com": "/logos/linkedin.svg",
-		"www.tiktok.com": "/logos/tiktok.svg",
-		"www.youtube.com": "/logos/youtube.svg"
+		"www.facebook.com": "/logos/logo-facebook.svg",
+		"github.com": "/logos/logo-github.svg",
+		"www.instagram.com": "/logos/logo-instagram.svg",
+		"www.linkedin.com": "/logos/logo-linkedin.svg",
+		"www.tiktok.com": "/logos/logo-tiktok.svg",
+		"www.youtube.com": "/logos/logo-youtube.svg"
 	}
 
 	if (email) {
@@ -27,8 +27,7 @@ function createSocialIcon(social, email=false) {
 				width={25}
 				height={25}
 				href={"mailto:" + social}
-				src="/logos/gmail.svg"
-				external={true}
+				src="/logos/mail-outline.svg"
 			/>
 		);
 	}
