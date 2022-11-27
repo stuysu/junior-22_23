@@ -33,7 +33,7 @@ export default function NavBar({ currentPage }) {
       <div className={styles.navbarSocials}>
         <ImageLink
           href="https://www.facebook.com/StuyJuniorCaucus/"
-          src="/logos/facebook.svg"
+          src="/logos/logo-facebook.svg"
           width={80}
           height={64}
           alt="Facebook Logo"
@@ -41,7 +41,7 @@ export default function NavBar({ currentPage }) {
         />
         <ImageLink
           href="https://www.instagram.com/stuyjuniorcaucus/"
-          src="/logos/instagram.svg"
+          src="/logos/logo-instagram.svg"
           width={80}
           height={64}
           alt="Instagram Logo"
