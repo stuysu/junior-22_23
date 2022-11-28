@@ -14,18 +14,22 @@ function renderMembers(members) {
   members.forEach((member, i) => {
     let memberCard = (
       <MemberCard
-        name={member["Name"]}
-        image_src={member["Photo"]}
-        role={member["Position"]}
-        bio={member["Bio"]}
-        email={member["Email"]}
-        socials={[member["Socials 1"], member["Socials 2"], member["Socials 3"]]}
+        name={member['Name']}
+        image_src={member['Photo']}
+        role={member['Position']}
+        bio={member['Bio']}
+        email={member['Email']}
+        socials={[
+          member['Socials 1'],
+          member['Socials 2'],
+          member['Socials 3']
+        ]}
         key={i}
       />
     );
 
-    if (!deps[member["Department"]]) deps[member["Department"]] = [];
-    deps[member["Department"]].push(memberCard);
+    if (!deps[member['Department']]) deps[member['Department']] = [];
+    deps[member['Department']].push(memberCard);
   });
 
   let collections = Object.entries(deps).map(([department, memberCards], k) => {
@@ -39,23 +43,23 @@ function renderMembers(members) {
   return collections;
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ res }) {
   //Cache
   res.setHeader(
     'Cache-Control',
     'public, s-maxage=120, stale-while-revalidate=600'
-  )
+  );
 
-  const { google } = require("googleapis");
+  const { google } = require('googleapis');
 
   const sheets = google.sheets({
-    version: "v4",
-    auth: process.env.SHEETS_API_KEY,
+    version: 'v4',
+    auth: process.env.SHEETS_API_KEY
   });
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.MEMBERS_SPREADSHEET_ID,
-    range: "Form Responses 1!A1:Z",
+    range: 'Form Responses 1!A1:Z'
   });
 
   //Convert spreadsheet data into array of dicts
@@ -73,11 +77,7 @@ export async function getServerSideProps({ req, res }) {
 
   //Had to move the title and currentPage stuff because getServerSideProps and getStaticProps can't coexist
   return {
-    props: {
-      members: parsed_csv,
-      title: 'Members | Junior Caucus',
-      currentPage: 'Members'
-    }
+    props: { members: parsed_csv, pageName: 'Members' }
   };
 }
 
@@ -87,5 +87,5 @@ export default function Members({ members }) {
       <h1 className="title">Our Team</h1>
       {renderMembers(members)}
     </>
-  )
+  );
 }

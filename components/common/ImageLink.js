@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../../styles/components/ImageLink.module.css';
+import styles from '../../styles/components/common/ImageLink.module.css';
 
 export default function ImageLink({ href, src, width, height, alt, external }) {
   const image = (

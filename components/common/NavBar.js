@@ -1,9 +1,8 @@
-import ImageLink from './ImageLink';
 import Image from 'next/image';
+import ImageLink from './ImageLink';
 import Link from 'next/link';
-import {useState} from 'react';
-
-import styles from '../../styles/components/NavBar.module.css';
+import styles from '../../styles/components/common/NavBar.module.css';
+import { useState } from 'react';
 
 const pages = [
   ['Home', '/'],
@@ -13,8 +12,8 @@ const pages = [
 export default function NavBar({ currentPage }) {
   const [isHamburgerActive, setIsHamburgerActive] = useState(false);
 
-  const toggleHamburger = event => {
-    setIsHamburgerActive(current => !current);
+  const toggleHamburger = (event) => {
+    setIsHamburgerActive((current) => !current);
   };
 
   return (
@@ -49,20 +48,30 @@ export default function NavBar({ currentPage }) {
         />
       </div>
 
-      <div className={`${styles.hamburger} ${isHamburgerActive ? styles.openedHamburger : ""}`} onClick={toggleHamburger}>
-        <Image
-          src="/logos/hamburger.svg"
-          width={64}
-          height={64}
-        />
+      <div
+        className={`${styles.hamburger} ${
+          isHamburgerActive ? styles.openedHamburger : ''
+        }`}
+        onClick={toggleHamburger}
+      >
+        <Image src="/logos/hamburger.svg" width={64} height={64} />
       </div>
 
-      <div className={`${styles.navbarLinks} ${isHamburgerActive ? styles.openedHamburger : ""}`}>
+      <div
+        className={`${styles.navbarLinks} ${
+          isHamburgerActive ? styles.openedHamburger : ''
+        }`}
+      >
         {pages.map(([page, link], index) => {
           if (page != currentPage) {
             return (
               <Link href={link} key={index}>
-                <p className={styles.navbarLinkClickable} onClick={toggleHamburger}>{page}</p>
+                <p
+                  className={styles.navbarLinkClickable}
+                  onClick={toggleHamburger}
+                >
+                  {page}
+                </p>
               </Link>
             );
           } else {

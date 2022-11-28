@@ -1,4 +1,4 @@
-import styles from '../../styles/components/DayOverview.module.css';
+import styles from '../../styles/components/calendar/DayOverview.module.css';
 
 export default function DayOverview({ date }) {
   const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
