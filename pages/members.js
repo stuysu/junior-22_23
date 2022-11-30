@@ -18,7 +18,7 @@ function renderMembers(members) {
         image_src={member['Photo']}
         role={member['Position']}
         bio={member['Bio']}
-        email={member['Email']}
+        email={member['Email Address']}
         socials={[
           member['Socials 1'],
           member['Socials 2'],

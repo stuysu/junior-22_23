@@ -16,11 +16,9 @@ export default function ImageLink({ href, src, width, height, alt, external }) {
   // Open in new tab if external
   if (external) {
     return (
-      <Link href={href} passHref>
-        <a target="_blank" rel="noopener noreferrer">
-          {image}
-        </a>
-      </Link>
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {image}
+      </a>
     );
   }
 
