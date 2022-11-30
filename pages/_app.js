@@ -5,19 +5,18 @@ import NavBar from '../components/common/NavBar';
 
 export default function MyApp({ Component, pageProps }) {
   /**
-   * Every page should export an async function called getStaticProps.
-   * This function should return an object with a props property.
-   * The props property should be an object with the following properties:
-   * - title: the title of the page
-   * - currentPage: the name of the page
+   * Every page should export an async function called `getStaticProps` or `getServerSideProps`.
+   * This function should return an object with a `props` property.
+   * The `props` property should be an object containing this property:
+   * - `pageName`: the name of the page (e.g. "Home")
    */
-  const { title, currentPage } = pageProps;
+  const { pageName } = pageProps;
 
   return (
     <>
-      <Meta title={title} />
+      <Meta title={`${pageName} | Junior Caucus`} />
 
-      <NavBar currentPage={currentPage} />
+      <NavBar currentPage={pageName} />
 
       <Component {...pageProps} />
     </>

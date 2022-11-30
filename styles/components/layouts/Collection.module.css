@@ -21,10 +21,9 @@
 }
 
 .gridContainerContainer {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
 	width: 80%;
+	transform: translate(-50%);
+	margin-left: 50%;
 }
 
 .gridContainer {

@@ -1,7 +1,7 @@
 import Calendar from 'react-calendar';
 import DayOverview from './DayOverview';
 import EventItem from './EventItem';
-import styles from '../../styles/components/CalendarWidget.module.css';
+import styles from '../../styles/components/calendar/CalendarWidget.module.css';
 import { useState } from 'react';
 
 export default function CalendarWidget({ events }) {

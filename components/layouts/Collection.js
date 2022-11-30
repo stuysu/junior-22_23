@@ -1,4 +1,4 @@
-import styles from "../../styles/components/Collection.module.css";
+import styles from '../../styles/components/layouts/Collection.module.css';
 
 export default function Collection({ title, children }) {
 	return (
