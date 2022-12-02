@@ -63,9 +63,8 @@ export default function MemberCard({
         <div className={styles.memberFront}>
           {/*Temp, changed to img tag so any domain can be used*/}
           <img
-            src={image_src || '/images/Portrait_Placeholder.jpg'}
-            width={300}
-            height={300}
+            src={image_src || '/images/Portrait_Placeholder.png'}
+            className={styles.memberImage}
           />
         </div>
         <div className={styles.memberDesc}>{bio}</div>
