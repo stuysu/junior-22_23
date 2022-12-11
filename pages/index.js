@@ -6,9 +6,9 @@ import { google } from 'googleapis';
 import styles from '../styles/Home.module.css';
 
 const fetchScheduleData = async () => {
- 
-  let data = await fetch("https://pserb-web.vercel.app/api/weekly-schedule");
-  console.log(data);
+  let res = await fetch(process.env.SCHEDULE_API);
+  let data = await res.json(); // this says json but its just normal javascript object?
+  return data;
 }
 
 export async function getServerSideProps({ res }) {
@@ -29,6 +29,8 @@ export async function getServerSideProps({ res }) {
     calendarId: process.env.CALENDAR_ID
   });
 
+  // schedule data
+  const scheduleData = await fetchScheduleData();
 
   return {
     props: { events: eventsRes.data.items, pageName: 'Home' }
