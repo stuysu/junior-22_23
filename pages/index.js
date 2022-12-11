@@ -1,7 +1,15 @@
 import CalendarWidget from '../components/calendar/CalendarWidget';
+import ScheduleWidget from '../components/schedule/ScheduleWidget';
+
 import Container from '../components/layouts/Container';
 import { google } from 'googleapis';
 import styles from '../styles/Home.module.css';
+
+const fetchScheduleData = async () => {
+ 
+  let data = await fetch("https://pserb-web.vercel.app/api/weekly-schedule");
+  console.log(data);
+}
 
 export async function getServerSideProps({ res }) {
   // Set cache
@@ -20,6 +28,7 @@ export async function getServerSideProps({ res }) {
   const eventsRes = await calendar.events.list({
     calendarId: process.env.CALENDAR_ID
   });
+
 
   return {
     props: { events: eventsRes.data.items, pageName: 'Home' }
@@ -44,6 +53,9 @@ export default function Home({ events }) {
 
       <Container title="Calendar">
         <CalendarWidget events={events} />
+      </Container>
+      <Container title="Schedule">
+        <ScheduleWidget />
       </Container>
     </>
   );
