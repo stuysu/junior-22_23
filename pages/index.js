@@ -29,15 +29,15 @@ export async function getServerSideProps({ res }) {
     calendarId: process.env.CALENDAR_ID
   });
 
-  // schedule data
-  const scheduleData = await fetchScheduleData();
+  // schedule
+  const schedule = await fetchScheduleData();
 
   return {
-    props: { events: eventsRes.data.items, pageName: 'Home' }
+    props: { events: eventsRes.data.items, schedule: schedule, pageName: 'Home' }
   };
 }
 
-export default function Home({ events }) {
+export default function Home({ events, schedule }) {
   return (
     <>
       <div className={styles.titleContainer}>
@@ -57,7 +57,7 @@ export default function Home({ events }) {
         <CalendarWidget events={events} />
       </Container>
       <Container title="Schedule">
-        <ScheduleWidget />
+        <ScheduleWidget schedule={schedule} />
       </Container>
     </>
   );
