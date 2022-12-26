@@ -6,7 +6,8 @@ import { useState } from 'react';
 
 const pages = [
   ['Home', '/'],
-  ['Members', '/members']
+  ['Members', '/members'],
+  ['Resources', '/resource']
 ];
 
 export default function NavBar({ currentPage }) {
