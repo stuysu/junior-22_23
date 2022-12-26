@@ -9,7 +9,7 @@ const getFormattedTime = (date) => {
         hours = hours % 12;
     }
 
-    return `${hours}:${date.getMinutes()}:${String(date.getSeconds()).padStart(2, "0")}`;
+    return `${hours}:${String(date.getMinutes()).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
 }
 
 const getFormattedDay = (schedule, date) => {
@@ -32,6 +32,54 @@ export default function ScheduleWidget({ schedule }) {
         setActiveTime(new Date());
     }
     
+    function findBlock() {
+        // convert schedule startTimes into minutes
+        let minutes = [];
+        let day = getDayOfWeek(activeTime);
+        let dayInfo = schedule.days[day];
+        dayInfo.bell.schedule.forEach(block => {
+            let s = block.startTime.split(":");
+            minutes.push(Number(s[0]) * 60 + Number(s[1]));
+        });
+
+        let cMinutes = activeTime.getHours() * 60 + activeTime.getMinutes();
+
+        let blockNum = minutes.length - 1;
+        for (let i = 0; i < minutes.length; ++i) {
+            if (cMinutes < minutes[i]) {
+                blockNum = i - 1;
+                break;
+            }
+        }
+        // sMinutes = when did the block start
+        // cMinutes = current minutes
+        return {
+            block: blockNum,
+            blockName: dayInfo.bell.schedule[blockNum].name,
+            sMinutes: minutes[blockNum],
+            cMinutes: cMinutes,
+            progressMinutes: cMinutes - minutes[blockNum],
+            endMinutes: dayInfo.bell.schedule[blockNum].duration
+        }
+    }
+
+    function renderBlock () {
+        let blockData = findBlock();
+        
+        return (
+            <div className={styles.scheduleBlock}>
+                <div className={styles.scheduleBlockTitle}>
+                    {blockData.blockName}
+                </div>
+                <div className={styles.scheduleProgressContainer}>
+                    <div className={[styles.blockElapsed, styles.scheduleProgress].join(' ')}>{blockData.progressMinutes}</div>
+                    <div className={[styles.blockEnd, styles.scheduleProgress].join(' ')}>{blockData.endMinutes - blockData.progressMinutes}</div>
+                </div>
+            </div>
+        )
+    }
+
+    
     // SET TIMEOUT SO THAT IT MATCHES UP WITH A SECOND (LESS BUGGY SECOND CHANGING)
     setTimeout(() => { setInterval(refreshTime, 1000); }, 1000 - new Date().getMilliseconds());
     
@@ -44,6 +92,8 @@ export default function ScheduleWidget({ schedule }) {
                 <div className={styles.timeWrapper}>
                     {getFormattedTime(activeTime)}
                 </div>
+
+                {renderBlock()}
             </div>
         </div>
     );

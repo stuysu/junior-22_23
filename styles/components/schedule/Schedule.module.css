@@ -8,10 +8,9 @@
 }
 
 .scheduleTime {
-    margin-top: 10px;
+    margin-top: 15px;
     height: 50px;
     width: 100%;
-    height: auto;
     color: black;
     display: flex;
     justify-content: center;
@@ -27,6 +26,48 @@
 
 /* PREVENTS TIME FROM SHIFTING. different numbers have different widths */
 .timeWrapper {
-    width: 67px;
+    width: 66px;
     display: flex;
+}
+
+.scheduleBlock {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 230px;
+}
+
+.scheduleBlockTitle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+}
+
+.scheduleProgressContainer {
+    height: 210px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scheduleProgress {
+    width: 200px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    margin: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.blockElapsed {
+    color: rgb(67, 148, 67);
+}
+
+.blockEnd {
+    color: rgb(255, 92, 92);
 }
