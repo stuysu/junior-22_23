@@ -25,8 +25,21 @@ const getDayOfWeek = (date) => {
     return day - 1;
 }
 
+const getScheduleDay = (schedule, date) => {
+    // incase the day starts on tuesday i think the api breaks? Not sure, but this is just in case
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let scheduleDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    
+    for (let i = 0; i < schedule.days.length; ++i) {
+        if (schedule.days[i].day == scheduleDate) return i;
+    }
+
+    return -1;
+}
+
 export default function ScheduleWidget({ schedule }) {
     const [activeTime, setActiveTime] = useState(new Date());
+    const [isSchool, setSchool] = useState(true);
 
     function refreshTime() {
         setActiveTime(new Date());
@@ -35,7 +48,12 @@ export default function ScheduleWidget({ schedule }) {
     function findBlock() {
         // convert schedule startTimes into minutes
         let minutes = [];
-        let day = getDayOfWeek(activeTime);
+        let day = getScheduleDay(schedule, activeTime);;
+       
+        if (day == -1) 
+            return;
+        
+        
         let dayInfo = schedule.days[day];
         dayInfo.bell.schedule.forEach(block => {
             let s = block.startTime.split(":");
@@ -65,6 +83,10 @@ export default function ScheduleWidget({ schedule }) {
 
     function renderBlock () {
         let blockData = findBlock();
+        if (!blockData) {
+            setSchool(false);
+            return;
+        }
         
         return (
             <div className={styles.scheduleBlock}>
@@ -93,7 +115,10 @@ export default function ScheduleWidget({ schedule }) {
                     {getFormattedTime(activeTime)}
                 </div>
 
-                {renderBlock()}
+                {
+                    isSchool ? renderBlock() : (<div className={styles.noSchool}>No School</div>)
+                }
+                
             </div>
         </div>
     );
