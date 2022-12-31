@@ -1,6 +1,6 @@
-import { useState } from "react";
-import styles from "../../styles/components/schedule/Schedule.module.css";
 import FullscreenIcon from "../../public/logos/fullscreen.png";
+import styles from "../../styles/components/schedule/Schedule.module.css";
+import { useState } from "react";
 
 const getFormattedTime = (date) => {
     let hours = date.getHours();
