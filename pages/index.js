@@ -2,7 +2,6 @@ import CalendarWidget from '../components/calendar/CalendarWidget';
 import ScheduleWidget from '../components/schedule/ScheduleWidget';
 
 import Container from '../components/layouts/Container';
-import ScheduleWidget from '../components/schedule/ScheduleWidget';
 import { google } from 'googleapis';
 import styles from '../styles/Home.module.css';
 
