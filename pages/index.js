@@ -2,8 +2,11 @@ import CalendarWidget from '../components/calendar/CalendarWidget';
 import ScheduleWidget from '../components/schedule/ScheduleWidget';
 
 import Container from '../components/layouts/Container';
+import ScheduleWidget from '../components/schedule/ScheduleWidget';
 import { google } from 'googleapis';
 import styles from '../styles/Home.module.css';
+
+import { useState } from "react";
 
 const fetchScheduleData = async () => {
   let res = await fetch(process.env.SCHEDULE_API);
@@ -38,6 +41,14 @@ export async function getServerSideProps({ res }) {
 }
 
 export default function Home({ events, schedule }) {
+  const [fullscreen, setFullscreen] = useState(false);
+
+  if (fullscreen) return (
+    <ScheduleWidget schedule={schedule} fullscreen={true} onFullscreen={() => {
+      setFullscreen(false)
+    }} />
+  )
+
   return (
     <>
       <div className={styles.titleContainer}>
@@ -57,7 +68,9 @@ export default function Home({ events, schedule }) {
         <CalendarWidget events={events} />
       </Container>
       <Container title="Schedule">
-        <ScheduleWidget schedule={schedule} />
+        <ScheduleWidget schedule={schedule} fullscreen={false} onFullscreen={() => {
+          setFullscreen(true);
+        }} />
       </Container>
     </>
   );
