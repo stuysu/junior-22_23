@@ -1,0 +1,22 @@
+.contactUrl {
+    width: 500px;
+    height: 100px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    cursor: pointer;
+    font-size: 25px;
+    transition: 0.3s all ease;
+    background: white;
+    color: rgb(37, 37, 37);
+    margin-top: 20px;
+}
+
+.contactUrl:hover {
+    background: rgb(216, 216, 216);
+    color: black;
+    transition: 0.6s all ease;
+}

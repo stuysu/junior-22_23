@@ -10,7 +10,7 @@ export async function getServerSideProps({ res }) {
     }
 }
 
-export default function resource () {
+export default function Resource () {
     return (
         <>
             <h1 className="title">Resources</h1>
