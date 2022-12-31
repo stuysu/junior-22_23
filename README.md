@@ -18,5 +18,6 @@ The Stuyvesant Junior Caucus (2022-2023) website, developed with Next.js!
 | `MEMBERS_SPREADSHEET_ID` | The ID of the Google Sheets containing the members data.                                                 |
 | `CALENDAR_API_KEY`       | The API key for the [Google Calendar API](https://developers.google.com/calendar/api/quickstart/nodejs). |
 | `CALENDAR_ID`            | The ID of the Google Calendar containing the events.                                                     |
+| `SCHEDULE_API`            | The Stuy Schedule API Endpoint                                                     |
 
 4. Run the development server (`npm run dev`).
