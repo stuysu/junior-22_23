@@ -1,10 +1,29 @@
-.scheduleWidget {
+.scheduleSmall {
     width: 600px;
     height: 300px;
+    position: relative;
+}
+
+.scheduleBig {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.scheduleWidget {
+    /*
+    width: 600px;
+    height: 300px;
+    position: relative;
+    */
     border-radius: 10px;
     overflow: hidden;
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: relative;
 }
 
 .scheduleTime {
@@ -79,4 +98,23 @@
     justify-content: center;
     font-size: 50px;
     align-items: center;
+    position: relative;
+}
+
+.bottomContainer {
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    z-index: 100;
+}
+
+.fullscreenIcon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
 }

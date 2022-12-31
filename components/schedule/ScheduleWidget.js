@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../../styles/components/schedule/Schedule.module.css";
+import FullscreenIcon from "../../public/logos/fullscreen.png";
 
 const getFormattedTime = (date) => {
     let hours = date.getHours();
@@ -37,7 +38,12 @@ const getScheduleDay = (schedule, date) => {
     return -1;
 }
 
-export default function ScheduleWidget({ schedule }) {
+/*
+    schedule: Object
+    onFullscreen: Function MANDATORY
+*/
+
+export default function ScheduleWidget({ schedule, fullscreen, onFullscreen }) {
     const [activeTime, setActiveTime] = useState(new Date());
     const [isSchool, setSchool] = useState(true);
 
@@ -106,7 +112,7 @@ export default function ScheduleWidget({ schedule }) {
     setTimeout(() => { setInterval(refreshTime, 1000); }, 1000 - new Date().getMilliseconds());
     
     return (
-        <div className={styles.scheduleWidget}>
+        <div className={`${(fullscreen ? styles.scheduleBig : styles.scheduleSmall)} ${styles.scheduleWidget}`}>
             <div className={styles.scheduleTime}>
                 <div className={styles.dateWrapper}>
                     {getFormattedDay(schedule, activeTime)}
@@ -114,11 +120,15 @@ export default function ScheduleWidget({ schedule }) {
                 <div className={styles.timeWrapper}>
                     {getFormattedTime(activeTime)}
                 </div>
+            </div>
+            {
+                isSchool ? renderBlock() : (<div className={styles.noSchool}>No School</div>)
+            }
 
-                {
-                    isSchool ? renderBlock() : (<div className={styles.noSchool}>No School</div>)
-                }
-                
+            <div className={styles.bottomContainer}>
+                <img onClick={() => {
+                    onFullscreen();
+                }} className={styles.fullscreenIcon} src="logos/fullscreen.png" />
             </div>
         </div>
     );
