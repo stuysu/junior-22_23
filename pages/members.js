@@ -14,16 +14,7 @@ function renderMembers(members) {
   members.forEach((member, i) => {
     let memberCard = (
       <MemberCard
-        name={member['Name']}
-        image_src={member['Photo']}
-        role={member['Position']}
-        bio={member['Bio']}
-        email={member['Email Address']}
-        socials={[
-          member['Socials 1'],
-          member['Socials 2'],
-          member['Socials 3']
-        ]}
+        member={member}
         key={i}
       />
     );
@@ -68,12 +59,14 @@ export async function getServerSideProps({ res }) {
   let parsed_csv = rows.map((row) => {
     let dict = {};
 
-    row.forEach((v, i) => {
-      dict[columns[i]] = v;
-    });
+    columns.forEach((v, i) => {
+      dict[columns[i]] = row[i] || "";
+    })
 
     return dict;
   });
+
+  console.log(parsed_csv);
 
   //Had to move the title and currentPage stuff because getServerSideProps and getStaticProps can't coexist
   return {
