@@ -34,7 +34,7 @@ function createSocialIcon(social, email = false) {
 
   let parsed_url = url.parse(social);
 
-  if (parsed_url.host == null) {
+  if (!logoForSocial[parsed_url.host]) {
     return;
   }
 
@@ -50,12 +50,7 @@ function createSocialIcon(social, email = false) {
 }
 
 export default function MemberCard({
-  name,
-  image_src,
-  role,
-  bio,
-  email,
-  socials
+  member
 }) {
   return (
     <div className={styles.memberCardCont}>
@@ -63,23 +58,22 @@ export default function MemberCard({
         <div className={styles.memberFront}>
           {/*Temp, changed to img tag so any domain can be used*/}
           <img
-            src={image_src || '/images/Portrait_Placeholder.jpg'}
-            width={300}
-            height={300}
+            src={member['Photo'] || '/images/Portrait_Placeholder.png'}
+            className={styles.memberImage}
           />
         </div>
-        <div className={styles.memberDesc}>{bio}</div>
+        <div className={styles.memberDesc}>{member['Bio']}</div>
       </div>
       <div className={styles.memberInfo}>
         <div className={styles.mainInfo}>
-          <div className={styles.memberName}>{name}</div>
-          <div className={styles.memberRole}>{role || 'Member'}</div>
+          <div className={styles.memberName}>{member['Name']}</div>
+          <div className={styles.memberRole}>{member['Position'] || 'Member'}</div>
         </div>
         <div className={styles.memberSocials}>
-          {createSocialIcon(email, true)}
-          {createSocialIcon(socials[0])}
-          {createSocialIcon(socials[1])}
-          {createSocialIcon(socials[2])}
+          {createSocialIcon(member['Email Address'], true)}
+          {createSocialIcon(member['Socials 1'])}
+          {createSocialIcon(member['Socials 2'])}
+          {createSocialIcon(member['Socials 3'])}
         </div>
       </div>
     </div>

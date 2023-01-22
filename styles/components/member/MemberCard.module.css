@@ -74,3 +74,11 @@
 .memberCard:hover .memberFront {
 	visibility: hidden;
 }
+
+.memberImage {
+	min-width: 300px;
+	min-height: 300px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
