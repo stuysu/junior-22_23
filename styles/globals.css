@@ -30,6 +30,12 @@ body {
   text-align: center;
 }
 
+.paragraph {
+  font-size: 20px;
+  color: rgb(31, 31, 31);
+  text-align: center;
+}
+
 .absolute-center {
   position: absolute;
   top: 50%;

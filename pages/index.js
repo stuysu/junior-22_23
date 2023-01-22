@@ -1,7 +1,17 @@
 import CalendarWidget from '../components/calendar/CalendarWidget';
+import ScheduleWidget from '../components/schedule/ScheduleWidget';
+
 import Container from '../components/layouts/Container';
 import { google } from 'googleapis';
 import styles from '../styles/Home.module.css';
+
+import { useState } from "react";
+
+const fetchScheduleData = async () => {
+  let res = await fetch(process.env.SCHEDULE_API);
+  let data = await res.json(); // this says json but its just normal javascript object?
+  return data;
+}
 
 export async function getServerSideProps({ res }) {
   // Set cache
@@ -21,12 +31,23 @@ export async function getServerSideProps({ res }) {
     calendarId: process.env.CALENDAR_ID
   });
 
+  // schedule
+  const schedule = await fetchScheduleData();
+
   return {
-    props: { events: eventsRes.data.items, pageName: 'Home' }
+    props: { events: eventsRes.data.items, schedule: schedule, pageName: 'Home' }
   };
 }
 
-export default function Home({ events }) {
+export default function Home({ events, schedule }) {
+  const [fullscreen, setFullscreen] = useState(false);
+
+  if (fullscreen) return (
+    <ScheduleWidget schedule={schedule} fullscreen={true} onFullscreen={() => {
+      setFullscreen(false)
+    }} />
+  )
+
   return (
     <>
       <div className={styles.titleContainer}>
@@ -44,6 +65,11 @@ export default function Home({ events }) {
 
       <Container title="Calendar">
         <CalendarWidget events={events} />
+      </Container>
+      <Container title="Schedule">
+        <ScheduleWidget schedule={schedule} fullscreen={false} onFullscreen={() => {
+          setFullscreen(true);
+        }} />
       </Container>
     </>
   );

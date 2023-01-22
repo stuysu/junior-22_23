@@ -6,7 +6,8 @@ import { useState } from 'react';
 
 const pages = [
   ['Home', '/'],
-  ['Members', '/members']
+  ['Members', '/members'],
+  ['Contact', '/contact']
 ];
 
 export default function NavBar({ currentPage }) {
@@ -54,7 +55,7 @@ export default function NavBar({ currentPage }) {
         }`}
         onClick={toggleHamburger}
       >
-        <Image src="/logos/hamburger.svg" width={64} height={64} />
+        <Image src="/logos/hamburger.svg" width={64} height={64} alt="" />
       </div>
 
       <div
