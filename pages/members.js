@@ -66,8 +66,6 @@ export async function getServerSideProps({ res }) {
     return dict;
   });
 
-  console.log(parsed_csv);
-
   //Had to move the title and currentPage stuff because getServerSideProps and getStaticProps can't coexist
   return {
     props: { members: parsed_csv, pageName: 'Members' }
