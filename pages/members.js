@@ -10,7 +10,7 @@ MEMBER IN FORMAT
 ]
 */
 function renderMembers(members) {
-  let deps = {};
+  let deps = {'IT': []};
   members.forEach((member, i) => {
     let memberCard = (
       <MemberCard
